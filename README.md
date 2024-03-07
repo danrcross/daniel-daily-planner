@@ -2,7 +2,7 @@
 
 ## Description
 
-The goal here was to create a website that will function as a work-day scheduler (a daily planner). The page should list the user's tasks for each hour. Each block should have a save button that saves the text that the user input for that time-block. The text should be saved into localStorage. When the user reloads/revisits the page, their time-blocks should update with the text that was previously saved there. 
+The goal here was to create a website that will function as a work-day scheduler (a daily planner). The page should list the user's tasks for each hour. Each time-block should have a save button that saves the text that the user input for that time-block. The text should be saved into localStorage. When the user reloads/revisits the page, their time-blocks should update with the text that was previously saved there. 
 
 I was given the beginnings of some code for this. The HTML structure was already outlined, and the structure of the time-blocks was provided. The HTML was already linked to the Bootstrap CSS library, which the given time-block calls upon. I used this time-block code as a jumping off point. 
 
@@ -16,7 +16,7 @@ Through this project, I had the opportunity to practice and solidify my previous
 - .map() method 
 - .get() method
 - .addClass() and .removeClass() 
-- use of 'this' as a means of event delegation
+- use of 'this' as a means of event delegation 
 - .val()
 
 ## Installation
