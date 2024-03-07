@@ -7,6 +7,23 @@ var currentHourAbs = dayjs().format('HH')
 var timeBlocks = $('.time-block')
 var hourOfBlock = $('.time-block > .hour')
 var saveBtn = timeBlocks.children('.btn')
+var clearBtn = $('#clearbtn')
+var inputFields = $('.description')
+var notification = $('#notification')
+var nContainer = $('#n-container')
+
+// Create a function to remove notification that will be displayed when a save or clear button is clicked
+// After 5 seconds, changes display of notification container from "flex" to "none"
+function quickDisplay() {
+  // Display a notification container at top of page
+  nContainer.removeClass("d-none")
+  nContainer.addClass("d-flex")
+  // Hide notification container after 5 seconds
+  setTimeout(function () {
+    nContainer.removeClass("d-flex")
+    nContainer.addClass("d-none")
+  }, 5000)
+}
 
 // Create function to grab the current day, and set it to the text content of the <p> in my header, with id = "currentDay"
 // Using day.js, sets current day in the format like "Tuesday, March 05, 2024"
@@ -90,6 +107,17 @@ saveBtn.click(function () {
   storeItem()
   // Time-block content is updated
   updateTBlocks()
+  // Show notification for 5-seconds
+  quickDisplay()
+  // Set text color of notification
+  if (notification.attr("class", "text-warning")) {
+    notification.removeClass("text-warning")
+    notification.addClass("text-white")
+  } else {
+    notification.addClass("text-white")
+  }
+  // Set text content to display
+  notification.text("Appointment saved in local storage \u2713")
 })
 
 // This function will pull the inputs stored in local storage and display them in their appropriate places on the page 
@@ -111,6 +139,37 @@ function updateTBlocks() {
   }
 }
 
+// EXTRA: Add functionality to a "Clear All" button that will clear all entries from page, and wipe out entries in localStorage
+function clearAll() {
+  // Clear text from <textarea> elements
+  inputFields.val('')
+  // Creates a loop: iterates thru the hourOfBlockArray object;
+  //    'block' stands in for each iteration thru array;  
+  hourOfBlockArray.forEach(function (block) {
+    // On each iteration: 
+    // selects key in local storage with same name as the hourOfBlockArray.id of current iteration (i.e. 'hour-9' for hourOfBlockArray[0].id)
+    // sets value of selected key to '', or empty
+    localStorage.setItem(block.id, JSON.stringify(''))
+  })
+  // Display a notification of "All appointments cleared from localStorage" at top of page
+  nContainer.removeClass("d-none")
+  nContainer.addClass("d-flex")
+  // Set text color of notification
+  if (notification.attr("class", "text-white")) {
+    notification.removeClass("text-white")
+    notification.addClass("text-warning")
+  } else {
+    notification.addClass("text-warning")
+  }
+  // Call function to display notification for 5 seconds
+  quickDisplay()
+  // Set text content to display
+  notification.text("All appointments cleared from localStorage \u2713")
+  
+}
+
+// Attach an event listener to the "Clear All" button; pass the clearAll() function
+clearBtn.click(clearAll)
 // At load, set the current date; update the time-block content
 setCurrentDay()
 updateTBlocks()
