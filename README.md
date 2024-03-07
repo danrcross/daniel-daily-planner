@@ -28,22 +28,22 @@ Visit this page to use the application: https://danrcross.github.io/daniel-daily
 Here are some demonstrations of the site's design and functionality:
 
 The basic layout:
-![Layout](assets/images/layout.png)
+![Layout](Assets/images/layout.png)
 
 Text entered: 
-![Text entry](assets/images/text-entry.png)
+![Text entry](Assets/images/text-entry.png)
 
 Item saved; notification displayed:
-![Save function & notification](assets/images/save-function-notification.png)
+![Save function & notification](Assets/images/save-function-notification.png)
 
 Data saved to local storage:
-![Local storage active](assets/images/localstorage-active.png)
+![Local storage active](Assets/images/localstorage-active.png)
 
 "Clear All" button: 
-![Clear button design](assets/images/clear-btn.png)
+![Clear button design](Assets/images/clear-btn.png)
 
 "Clear All" has replaced local storage items with empty strings; notification appears:
-![Clear button function & notification](assets/images/storage-clear-notification.png)
+![Clear button function & notification](Assets/images/storage-clear-notification.png)
 
 ## Credits
 
