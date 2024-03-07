@@ -1,6 +1,9 @@
 // NOTE: I deleted the wrapping function that was provided in the starter code. My instructors have suggested putting my script.js file at 
 //        the end of the body as the method of ensuring that the rest of the page loads before my code is executed.
 
+// EXTRAS: I added a button at the bottom of the page that clears all text fields and page-relevant data in local storage
+//         I also added a notification feature: a notification that displays for 5 seconds when localStorage is altered (added or deleted)
+
 // Declare global variables here:
 var currentDay = $('#currentDay')
 var currentHourAbs = dayjs().format('HH')
@@ -31,6 +34,10 @@ function setCurrentDay() {
   currentDay.text(dayjs().format('dddd, MMMM DD, YYYY'))
 }
 
+// NOTE: I apologize for the following huge comment block. I realized after going this route that it would have been easier to have simply
+//    changed the id of each time-block to conform to the 24-hour 'HH' format. Nonetheless, as a consequence I advanced my learning with the 
+//    incorporation of the day.js plugin as well as the use of .map() and .get()!
+
 // Objective: find a way to create a correspondence between the time-value of a certain time-block and a certain element within that time block
 // Solution used: Take the '8AM' format header for the block, convert that to 24-hour time format using day.js.
 //                Create an array that pairs that time with the time-block container based on its 'hour-8' id
@@ -38,21 +45,21 @@ function setCurrentDay() {
 //                based on its time-value's relationship to current time
 
 // Asked Xpert Learning Assistant about this one. Learned about .map() and .get()
-// The variable below will store an array of key-value pairs.
-// First, the hourOfBlock.map method will iterate over all elements included in hourOfBlock, via the .map() method
-// hourOfBlock would include all of the <div> elements that provide a time (e.g. "9AM") for each time block
-// The variable hourIdMatch will hold a key-value pair for each element included.
-// The first key, 'hour', will be paired with the value of the text included in the time <div> (using .text())
-// The second key, 'id', will be paired with the value of the unique id (e.g. "hour-10") of its parent element, 
-//  (using .parent() to select parent, and .attr() to select the id attribute)
-// Finally, .get() will convert the list of objects created by the .map() method into an array of key-value pairs.
+// Information about using CDN as a way of accessing day.js plugins was provided by Xpert Learning Assistant
+// This customParseFormat plugin is necessary to allow me to convert the 'hA' (9AM) format of the HTML text
+//    into the 'HH' 24-hour time pure number format of my currentHourAbs variable.
 
 // Reference for day.js info: https://day.js.org/docs/en/parse/string-format
 // Reference, on using CustomParseFormat plugin of day.js: https://day.js.org/docs/en/plugin/custom-parse-format
 
-// Information about using CDN as a way of accessing day.js plugins was provided by Xpert Learning Assistant
-// This customParseFormat plugin is necessary to allow me to convert the 'hA' (9AM) format of the HTML text
-//    into the 'HH' 24-hour time pure number format of my currentHourAbs variable.
+// The variable below will store an array of key-value pairs.
+// First, the hourOfBlock.map method will iterate over all elements included in hourOfBlock, via the .map() method
+// hourOfBlock would include all of the <div> elements that provide a time (e.g. "9AM") for each time block
+// With each iteration, hourText stores the text content. This is then passed into a dayjs method which reformats the text content.
+// The var hourIdMatch then stores a new object containing the converted hour, as well as the id of the block with that hour.
+// Each iteration returns this hourIdMatch.
+// Finally, .get() will convert the list of objects returned from each iteration into an array of key-value pairs.
+
 var hourOfBlockArray = hourOfBlock.map(function () {
   var hourText = $(this).text()
   var hourConvert = dayjs(hourText, 'hA').format('HH')
